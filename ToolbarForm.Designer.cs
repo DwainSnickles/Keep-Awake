@@ -14,6 +14,7 @@ namespace KeepAwake
         private Button btnKeepAwake;
         private Button btnOptions;
         private Timer topMostTimer;
+        private ToolTip tips;
 
         protected override void Dispose(bool disposing)
         {
@@ -37,6 +38,7 @@ namespace KeepAwake
             btnKeepAwake = new Button();
             btnOptions = new Button();
             topMostTimer = new Timer(components);
+            tips = new ToolTip(components);
 
             SuspendLayout();
 
@@ -141,6 +143,18 @@ namespace KeepAwake
             btnOptions.Text = "\uE713";
             btnOptions.UseVisualStyleBackColor = false;
             btnOptions.Click += btnOptions_Click;
+
+            // 
+            // tips
+            // 
+            tips.AutoPopDelay = 8000;
+            tips.InitialDelay = 300;
+            tips.ReshowDelay = 100;
+            tips.ShowAlways = true;
+            tips.SetToolTip(btnKeepAwake, "Keep this PC awake - blocks sleep and hibernation");
+            tips.SetToolTip(btnOptions, "Options - start or stop keep awake, RAM and CPU, or optimize now");
+            tips.SetToolTip(btnFull, "Show the main window");
+            tips.SetToolTip(btnExit, "Exit Keep Awake and allow sleep again");
 
             // 
             // topMostTimer

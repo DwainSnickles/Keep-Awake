@@ -30,6 +30,7 @@ namespace KeepAwake
         private Label lblLog;
         private Label lblFooter;
         private Timer timer;
+        private ToolTip tips;
 
         protected override void Dispose(bool disposing)
         {
@@ -69,6 +70,7 @@ namespace KeepAwake
             lblLog = new Label();
             lblFooter = new Label();
             timer = new Timer(components);
+            tips = new ToolTip(components);
 
             panelSleep.SuspendLayout();
             panelResources.SuspendLayout();
@@ -332,6 +334,15 @@ namespace KeepAwake
             lblFooter.Location = new Point(24, 520);
             lblFooter.Name = "lblFooter";
             lblFooter.Text = "Minimize this window to get the small RAM and CPU toolbar.";
+
+            // 
+            // tips
+            // 
+            tips.AutoPopDelay = 8000;
+            tips.InitialDelay = 300;
+            tips.ReshowDelay = 100;
+            tips.ShowAlways = true;
+            tips.SetToolTip(btnOptions, "Options - start or stop keep awake, RAM and CPU, or optimize now");
 
             // 
             // timer
