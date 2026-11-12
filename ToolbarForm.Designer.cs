@@ -79,12 +79,12 @@ namespace KeepAwake
             btnFull.FlatAppearance.MouseDownBackColor = Color.FromArgb(52, 57, 70);
             btnFull.FlatAppearance.MouseOverBackColor = Color.FromArgb(44, 48, 58);
             btnFull.FlatStyle = FlatStyle.Flat;
-            btnFull.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnFull.Font = new Font("Segoe MDL2 Assets", 9F);
             btnFull.ForeColor = Color.FromArgb(236, 239, 246);
             btnFull.Location = new Point(254, 9);
             btnFull.Name = "btnFull";
             btnFull.Size = new Size(34, 26);
-            btnFull.Text = "\u25A1";
+            btnFull.Text = "\uE922";
             btnFull.UseVisualStyleBackColor = false;
             btnFull.Click += btnFull_Click;
 
@@ -97,12 +97,12 @@ namespace KeepAwake
             btnExit.FlatAppearance.MouseDownBackColor = Color.FromArgb(150, 60, 60);
             btnExit.FlatAppearance.MouseOverBackColor = Color.FromArgb(120, 52, 52);
             btnExit.FlatStyle = FlatStyle.Flat;
-            btnExit.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnExit.Font = new Font("Segoe MDL2 Assets", 9F);
             btnExit.ForeColor = Color.FromArgb(236, 239, 246);
             btnExit.Location = new Point(292, 9);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(34, 26);
-            btnExit.Text = "\u2715";
+            btnExit.Text = "\uE8BB";
             btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
 
@@ -115,12 +115,12 @@ namespace KeepAwake
             btnKeepAwake.FlatAppearance.MouseDownBackColor = Color.FromArgb(52, 57, 70);
             btnKeepAwake.FlatAppearance.MouseOverBackColor = Color.FromArgb(44, 48, 58);
             btnKeepAwake.FlatStyle = FlatStyle.Flat;
-            btnKeepAwake.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnKeepAwake.Font = new Font("Segoe MDL2 Assets", 10F);
             btnKeepAwake.ForeColor = Color.FromArgb(74, 222, 128);
             btnKeepAwake.Location = new Point(178, 9);
             btnKeepAwake.Name = "btnKeepAwake";
             btnKeepAwake.Size = new Size(34, 26);
-            btnKeepAwake.Text = "\u23FB";
+            btnKeepAwake.Text = "\uE7E8";
             btnKeepAwake.UseVisualStyleBackColor = false;
             btnKeepAwake.Click += BtnKeepAwake_Click;
 
@@ -133,12 +133,12 @@ namespace KeepAwake
             btnOptions.FlatAppearance.MouseDownBackColor = Color.FromArgb(52, 57, 70);
             btnOptions.FlatAppearance.MouseOverBackColor = Color.FromArgb(44, 48, 58);
             btnOptions.FlatStyle = FlatStyle.Flat;
-            btnOptions.Font = new Font("Segoe UI Symbol", 12F);
+            btnOptions.Font = new Font("Segoe MDL2 Assets", 10F);
             btnOptions.ForeColor = Color.FromArgb(236, 239, 246);
             btnOptions.Location = new Point(216, 9);
             btnOptions.Name = "btnOptions";
             btnOptions.Size = new Size(34, 26);
-            btnOptions.Text = "\u2699";
+            btnOptions.Text = "\uE713";
             btnOptions.UseVisualStyleBackColor = false;
             btnOptions.Click += btnOptions_Click;
 

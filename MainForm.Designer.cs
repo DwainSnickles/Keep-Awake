@@ -286,12 +286,12 @@ namespace KeepAwake
             btnOptions.FlatAppearance.MouseDownBackColor = Color.FromArgb(52, 57, 70);
             btnOptions.FlatAppearance.MouseOverBackColor = Color.FromArgb(44, 48, 58);
             btnOptions.FlatStyle = FlatStyle.Flat;
-            btnOptions.Font = new Font("Segoe UI Symbol", 12F);
+            btnOptions.Font = new Font("Segoe MDL2 Assets", 12F);
             btnOptions.ForeColor = Color.FromArgb(236, 239, 246);
             btnOptions.Location = new Point(384, 14);
             btnOptions.Name = "btnOptions";
             btnOptions.Size = new Size(32, 32);
-            btnOptions.Text = "\u2699";
+            btnOptions.Text = "\uE713";
             btnOptions.UseVisualStyleBackColor = false;
             btnOptions.Click += btnOptions_Click;
 
