@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -19,6 +20,19 @@ namespace KeepAwake
         private bool _dragging;
         private Point _dragStart;
         private Point _formStart;
+
+        // The strip is two stacked rows: the readings bar, then a status line that only needs
+        // to be as wide as the text on it. The window is shaped to that text, so the empty
+        // block that used to sit to its right is no longer part of the window at all and
+        // clicks there reach whatever is underneath.
+        private const int DesignHeight = 58;
+        private const int ReadingsRowHeight = 40;
+        private const int StatusPadding = 12;
+        private const float StatusCornerRadius = 8f;
+
+        private readonly int _readingsHeight;
+        private readonly int _statusHeight;
+        private int _statusWidth;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct RECT
@@ -59,7 +73,18 @@ namespace KeepAwake
         public ToolbarForm()
         {
             InitializeComponent();
+
+            int fullHeight = ClientSize.Height;
+            _readingsHeight = (int)Math.Round(fullHeight * (double)ReadingsRowHeight / DesignHeight);
+            _statusHeight = fullHeight - _readingsHeight;
+
             RestoreSavedPosition();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            UpdateStripShape();
         }
 
         public bool HasSavedPosition { get; private set; }
@@ -73,6 +98,74 @@ namespace KeepAwake
         {
             lblDelta.Text = text ?? string.Empty;
             lblDelta.Visible = lblDelta.Text.Length > 0;
+            UpdateStripShape();
+        }
+
+        // Keeps the window snug around what it shows: the readings row, plus the status row
+        // trimmed to its text (with a rounded step where the row ends).
+        private void UpdateStripShape()
+        {
+            bool showStatus = lblDelta.Visible && lblDelta.Text.Length > 0;
+
+            _statusWidth = 0;
+            if (showStatus)
+            {
+                int textWidth = TextRenderer.MeasureText(lblDelta.Text, lblDelta.Font).Width;
+                _statusWidth = Math.Min(Width, lblDelta.Left + textWidth + StatusPadding);
+                lblDelta.SetBounds(
+                    lblDelta.Left,
+                    _readingsHeight,
+                    Math.Max(1, _statusWidth - lblDelta.Left - StatusPadding),
+                    lblDelta.Height);
+            }
+
+            int height = _readingsHeight + (showStatus ? _statusHeight : 0);
+            if (Height != height)
+            {
+                // The strip grows downwards; the spot it was parked in does not move.
+                ClientSize = new Size(Width, height);
+                ClampToVisibleScreen();
+            }
+
+            using (GraphicsPath shape = CreateStripShape(0f))
+            {
+                Region previous = Region;
+                Region = new Region(shape);
+                previous?.Dispose();
+            }
+
+            Invalidate();
+        }
+
+        private GraphicsPath CreateStripShape(float inset)
+        {
+            float left = inset;
+            float top = inset;
+            float right = Width - inset;
+            float bottom = Height - inset;
+            float rowBottom = _readingsHeight - inset;
+            float step = _statusWidth - inset;
+            float radius = StatusCornerRadius;
+
+            GraphicsPath shape = new GraphicsPath();
+
+            // With no status line - or one long enough to fill the strip - it is a plain rectangle.
+            if (_statusWidth <= 0 || step <= left + radius || step + radius >= right)
+            {
+                shape.AddRectangle(new RectangleF(left, top, right - left, bottom - top));
+                return shape;
+            }
+
+            shape.AddLine(left, top, right, top);
+            shape.AddLine(right, top, right, rowBottom);
+            shape.AddLine(right, rowBottom, step + radius, rowBottom);
+            shape.AddArc(step, rowBottom, radius * 2f, radius * 2f, 270f, -90f);
+            shape.AddLine(step, rowBottom + radius, step, bottom);
+            shape.AddLine(step, bottom, left, bottom);
+            shape.AddLine(left, bottom, left, top);
+            shape.CloseFigure();
+
+            return shape;
         }
 
         // Dragging works anywhere on the strip, including over the labels, because
@@ -149,9 +242,14 @@ namespace KeepAwake
 
         private void ToolbarForm_Paint(object sender, PaintEventArgs e)
         {
+            // The outline follows the shaped window, so the step under the readings row reads
+            // as an edge rather than a cut-off.
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            using (GraphicsPath shape = CreateStripShape(1f))
             using (Pen pen = new Pen(Color.FromArgb(64, 70, 84)))
             {
-                e.Graphics.DrawRectangle(pen, 0, 0, Width - 1, Height - 1);
+                e.Graphics.DrawPath(pen, shape);
             }
         }
 

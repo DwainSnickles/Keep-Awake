@@ -62,7 +62,7 @@ namespace KeepAwake
             lblDelta.AutoSize = false;
             lblDelta.Font = new Font("Segoe UI", 8.25F);
             lblDelta.ForeColor = Color.FromArgb(74, 222, 128);
-            lblDelta.Location = new Point(12, 32);
+            lblDelta.Location = new Point(12, 40);
             lblDelta.Name = "lblDelta";
             lblDelta.Size = new Size(160, 16);
             lblDelta.Text = "";

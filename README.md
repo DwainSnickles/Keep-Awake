@@ -6,6 +6,17 @@ A C# WinForms app that:
    screensaver and the screen timeout work.**
 2. **Relieves RAM and CPU pressure**, automatically once either one reaches **70%**.
 
+## Screenshots
+
+The compact toolbar that replaces the window while it is minimized. Its status line
+only takes the width of its text, so the rest of that row stays out of the way:
+
+![Keep Awake toolbar](docs/toolbar.png)
+
+The main window:
+
+![Keep Awake window](docs/main-window.png)
+
 ## Building and running
 
 Open `KeepAwake.sln` in Visual Studio, or from a terminal:
@@ -99,6 +110,7 @@ the NVIDIA accounting reset from the original project are not included.
 - `PowerKeeper.cs` - `SetThreadExecutionState` wrapper
 - `ResourceMonitor.cs` - RAM and CPU readings plus both actions
 - `powershell-legacy/` - the earlier PowerShell version, kept for reference
+- `docs/` - the two screenshots above
 
 ## Notes
 
