@@ -1,5 +1,7 @@
 # Keep Awake
 
+[![Build](https://github.com/DwainSnickles/Keep-Awake/actions/workflows/build.yml/badge.svg)](https://github.com/DwainSnickles/Keep-Awake/actions/workflows/build.yml)
+
 A C# WinForms app that:
 
 1. **Keeps the PC from going to sleep or hibernating while still letting the
