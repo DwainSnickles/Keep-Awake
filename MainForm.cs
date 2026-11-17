@@ -51,6 +51,8 @@ namespace KeepAwake
             _toolbar.OptionsRequested += Toolbar_OptionsRequested;
 
             BuildOptionsMenu();
+
+            chkAutoRam.Checked = true;
         }
 
         // ---------------------------------------------------------------- startup
@@ -68,6 +70,7 @@ namespace KeepAwake
                 lblRamDetail.Text = "Memory usage unavailable: " + ex.Message;
             }
 
+            StartAwake();
             timer.Start();
         }
 
