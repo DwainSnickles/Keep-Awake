@@ -121,3 +121,9 @@ the NVIDIA accounting reset from the original project are not included.
   sleep behaviour.
 - If Windows is already asleep the app cannot wake it; it only prevents sleep from
   being requested while it runs.
+
+## Support this project
+
+If this project saved you some time, you can leave a tip at
+[ko-fi.com/dwainhsnickles](https://ko-fi.com/dwainhsnickles) (cards, no account needed) or
+[paypal.me/YTDPlatinum](https://paypal.me/YTDPlatinum). Bug reports and pull requests are welcome too.
